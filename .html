@@ -1,0 +1,79 @@
+<!--html is a markup language for creating web pages-->
+<!--by using html tag we need to define the structure of a web page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<!--head tag is used to define metadata about the HTML document -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--title tag is used to define the title of the web page -->
+    <title>web page</title>
+</head>
+<!--styling the page -->
+<!--style tag is used to define CSS styles for the HTML document -->
+<!--font-family tag is used to specify the font of the text -->
+<!--background-color tag is used to specify the background color of the page -->
+<!--margin tag is used to specify the margin of the page -->
+<!--padding tag is used to specify the padding of the page ,padding is the space between the content and the border -->
+<style>
+
+    body {
+        /* Define the body's styling */
+        font-family: Arial, sans-serif;
+        background-color: white;
+        margin: 0;
+        padding: 20px;
+    }
+    h1 {
+        color: black;
+    }
+    p {
+        color: blueviolet;
+    }
+
+</style>
+<!--body tag is used to define the body of the HTML document -->
+<!--p tag is used to define a paragraph -->
+<body>
+    <h1>Welcome to My Web Page</h1>
+    <p>hello world this is my first web page.</p>
+</body>
+</html>
+<!--creating a student application form -->
+<!--form tag is used to create an HTML form for user input  -->
+
+<form action="/submit" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required><br><br>
+    <label for="grade">Grade:</label>
+    <input type="text" id="grade" name="grade" required><br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+    <input type="submit" value="Submit">
+</form>
+<!-- styling the form -->
+<style>
+    form {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: purple;
+    }
+   
+    input[type="submit"] {
+        background-color: black;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+</style>
