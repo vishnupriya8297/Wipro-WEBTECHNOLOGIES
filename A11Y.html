@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Numeronym Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <h1>Numeronym Generator</h1>
+
+  <label for="word">Enter a word:</label>
+  <input id="word" type="text" placeholder="accessibility" />
+  <button onclick="makeNumeronym()">Convert</button>
+
+  <p>
+    Result:
+    <strong id="result">—</strong>
+  </p>
+
+  <script>
+    function makeNumeronym() {
+      const word = document.getElementById("word").value.trim();
+
+      if (word.length <= 2) {
+        document.getElementById("result").textContent = word;
+        return;
+      }
+
+      const numeronym =
+        word[0] + (word.length - 2) + word[word.length - 1];
+
+      document.getElementById("result").textContent = numeronym;
+    }
+  </script>
+</body>
+</html>
