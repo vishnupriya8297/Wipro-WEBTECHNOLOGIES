@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+ <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #eventDetails {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+        }
+        button {
+            margin: 5px;
+        }
+        .selected {
+            background-color: #f0f0f0;
+        }
+        </style>
+<body>
+    <h2>Society Event Registration</h2>
+
+  <ul id="eventList"></ul>
+
+  <div id="eventDetails">
+    <h3 id="eventTitle"></h3>
+    <p id="eventDesc"></p>
+    <p>Participants: <span id="count">0</span></p>
+
+    <button id="registerBtn">Register</button>
+    <button id="unregisterBtn">Unregister</button>
+  </div>
+
+  <button id="addEventBtn">Add New Event</button>
+
+  <script src="script.js"></script>
+    
+</body>
+</html>
+<script>
+// STEP 2: Access DOM Objects
+const eventList = document.getElementById('eventList');
+const eventTitle = document.getElementById('eventTitle');
+const eventDesc = document.getElementById('eventDesc');
+const countSpan = document.getElementById('count');
+const registerBtn = document.getElementById('registerBtn');
+const unregisterBtn = document.getElementById('unregisterBtn');
+const addEventBtn = document.getElementById('addEventBtn');
+// STEP 3: Event Data
+let events = [
+    { title: 'MORNING CLASS', description: 'Morning JAVA SCRIPT class', participants: 0 },
+    { title: 'AFTERNOON CLASS', description: 'Afternoon SQL class', participants: 0 }
+];
+let selectedEventIndex = null;
+// STEP 4: Display Events Dynamically
+function displayEvents() {
+    eventList.innerHTML = '';
+    events.forEach((event, index) => {
+        const li = document.createElement('li');
+        li.textContent = event.title;
+        li.addEventListener('click', () => selectEvent(index));
+        eventList.appendChild(li);
+    });
+}
+displayEvents();
+// STEP 5: Handle Event Selection
+function selectEvent(index) {
+    selectedEventIndex = index;
+    const event = events[index];
+    eventTitle.textContent = event.title;
+    eventDesc.textContent = event.description;
+    countSpan.textContent = event.participants;
+    Array.from(eventList.children).forEach((li, idx) => {
+        li.classList.toggle('selected', idx === index);
+    });
+}
+// STEP 6: Register for Event
+registerBtn.addEventListener('click', () => {
+    if (selectedEventIndex !== null) {
+        events[selectedEventIndex].participants++;
+        countSpan.textContent = events[selectedEventIndex].participants;
+    } else {
+        alert('Please select an event first.');
+    }
+});
+// STEP 7: Unregister from Event
+unregisterBtn.addEventListener('click', () => {
+    if (selectedEventIndex !== null) {
+        if (events[selectedEventIndex].participants > 0) {
+            events[selectedEventIndex].participants--;
+            countSpan.textContent = events[selectedEventIndex].participants;
+        } else {
+            alert('No participants to unregister.');
+        }
+    } else {
+        alert('Please select an event first.');
+    }
+});
+// STEP 8: Add New Event Dynamically
+addEventBtn.addEventListener('click', () => {
+    const title = prompt('Enter event title:');
+    const description = prompt('Enter event description:');
+    if (title && description) {
+        events.push({ title, description, participants: 0 });
+        displayEvents();
+    } else {
+        alert('Event title and description cannot be empty.');
+    }
+});
+// STEP 9: Prevent Errors (Client-Side Validation) is handled in the above event listeners.
+// STEP 9: Prevent Errors (Client-Side Validation)
+
+// Disable register/unregister buttons until an event is selected
+registerBtn.disabled = true;
+unregisterBtn.disabled = true;
+
+function selectEvent(index) {
+  selectedEventIndex = index;
+
+  eventTitle.textContent = events[index].title;
+  eventDesc.textContent = events[index].description;
+  countSpan.textContent = events[index].participants;
+
+  registerBtn.disabled = false;
+  unregisterBtn.disabled = false;
+}
+
+// Prevent negative participant count
+unregisterBtn.addEventListener("click", () => {
+  if (selectedEventIndex === null) {
+    alert("Please select an event first.");
+    return;
+  }
+
+  if (events[selectedEventIndex].participants <= 0) {
+    alert("No participants to unregister.");
+    return;
+  }
+
+  events[selectedEventIndex].participants--;
+  countSpan.textContent = events[selectedEventIndex].participants;
+});
+
+
+</script>
